@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<!-- {% for join in joins %} -->
+			<span>Created by: {{ join.created_by.username }}</span>
+			<br>
+		    <span>{{ join.creater }}: {{ join.trip }}<br>
+		    {{ trip.start_date }}:{{ trip.end_date}}</span>
+		     <form action="/destroyJoinTrip/" method="post">{% csrf_token %}
+				<input type="hidden" name="join_id" value="{{join.id}}">
+				<input type="submit" name="" value="Cancel my trip">
+			</form>
+		    <br>
+		<!-- {% for user in users %}	 -->
+		    <span>{{ join.joined_by }} User goes here</span>
+	    <!-- {% endfor %} -->
+    <!-- {% endfor %} -->
+	    OR
+	    <a href="http://localhost:8000/landing/">Go Back to prior page</a>
+	    OR
+	    <a href="/logout">Logout</a>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+		<form action='/trips/' method='post'>
+			{% csrf_token %}
+			<table>
+				<tr>
+					<td><label for='creater'>where is this trip?</label></td>
+					<td><input type="text" name="creater"></td>
+				</tr>
+				<tr>
+					<td><label for='trip'>Describe what the trip is about and location:</label></td>
+					<td><textarea rows="5" cols="15" name="trip"></textarea></td>
+				</tr>
+				<tr>
+					<td><label for='start_date'>When is the start of the trip?</label></td>
+					<td><input type="text" name="start_date"></td>
+				</tr>
+				<tr>
+					<td><label for='end_date'>When is it over?</label></td>
+					<td><input type="text" name="end_date"></td>
+				</tr>
+			
+				<tr>
+					<td><input type="submit" name="submit_trip" value="submit"></td>
+				</tr>
+			</table>
+		</form>
+		{% if messages %}
+		<div id='messages'>
+			<ul>
+			    {% for message in messages %}
+			    <li>{{ message }}</li>
+			    {% endfor %}
+			</ul>
+		</div>
+		{% endif %}
+		<br>
+		<h2>trips</h2>
+
+		<div>
+			 {% for trip in trips %}
+			<span>Created by: {{ trip.created_by.username }}</span><br>
+		    <span>{{ trip.creater }}: {{ trip.trip }}<br>
+		    {{ trip.start_date }}:{{ trip.end_date}}</span>
+
+		    <form action="/createJoinTrip/" method="post">
+		    	{% csrf_token %}
+				<input type="hidden" name="trip_id" value="{{trip.id}}">
+				<input type="submit" name="" value="Add to list">
+			</form>
+		    <br>
+		    {% endfor %}
+		</div>
+
+		<h2>My Trips I'm taking</h2>
+
+		<div>
+			 {% for join in joins %}
+			<span>Created by: {{ join.created_by.username }}</span>
+			<br>
+		    <span><a class="abouttrip" href="/about_trip/">{{ join.creater }}</a>: {{ join.trip }}<br>
+		    {{ trip.start_date }}:{{ trip.end_date}}</span>
+		    <form action="/destroyJoinTrip/" method="post">{% csrf_token %}
+				<input type="hidden" name="join_id" value="{{join.id}}">
+				<input type="submit" name="" value="Cancel my trip">
+			</form>
+		    <br>
+		    {% endfor %}
+		</div>
+
+		<a href="/logout">Logout</a>
+	</body>
+</html>
