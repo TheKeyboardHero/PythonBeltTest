@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import messages
 from lognreg.models import Super_User
 from .models import Super_User, Super_trip
-from time import gmtime, strftime
+# from time import gmtime, strftime
 
 def index(request):
 	if 'super_user' not in request.session:
@@ -82,7 +82,7 @@ def destroyJoinTrip(request):
 
 
 
-def trip_friends(request):
+# def trip_friends(request):
 	
 
 
